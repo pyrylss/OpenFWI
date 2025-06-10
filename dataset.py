@@ -56,11 +56,11 @@ class FWIDataset(Dataset):
     # Load from one line
     def load_every(self, batch):
         batch = batch.split('\t')
-        data_path = batch[0] if len(batch) > 1 else batch[0][:-1]
+        data_path = batch[0].strip()
         data = np.load(data_path)[:, :, ::self.sample_ratio, :]
         data = data.astype('float32')
         if len(batch) > 1:
-            label_path = batch[1][:-1]    
+            label_path = batch[1].strip()
             label = np.load(label_path)
             label = label.astype('float32')
         else:
